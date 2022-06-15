@@ -1,0 +1,1 @@
+<?php $mysqli = mysqli_connect('localhost','root','','proyek_akademik');
