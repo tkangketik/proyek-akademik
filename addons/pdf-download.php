@@ -101,12 +101,12 @@ class myPDF extends FPDF
 				$this->Cell(45, 10, 'Subtotal', 1, 0, 'C');
 				break;
 
-			case 'Pasien':
-				$this->Cell(60, 10, 'Nama Pasien', 1, 0, 'L');
-				$this->Cell(60, 10, 'Alamat Pasien', 1, 0, 'L');
-				$this->Cell(60, 10, 'Nama Dokter', 1, 0, 'L');
-				$this->Cell(60, 10, 'Pesan', 1, 0, 'L');
-				break;
+			// case 'Pasien':
+			// 	$this->Cell(60, 10, 'Nama Pasien', 1, 0, 'L');
+			// 	$this->Cell(60, 10, 'Alamat Pasien', 1, 0, 'L');
+			// 	$this->Cell(60, 10, 'Nama Dokter', 1, 0, 'L');
+			// 	$this->Cell(60, 10, 'Pesan', 1, 0, 'L');
+			// 	break;
 
 			case 'Poliklinik':
 				$this->Cell(20, 10, '#', 1, 0, 'C');
@@ -215,10 +215,36 @@ class myPDF extends FPDF
 				$no = 1;
 				$sql = $db->query("SELECT * FROM enkripsi INNER JOIN pasien on enkripsi.KodePsn = pasien.KodePsn INNER JOIN resep on enkripsi.KodePsn = resep.KodePsn INNER JOIN dokter on resep.KodeDkt = dokter.KodeDkt WHERE id = '$id'");
 				while ($data = $db->fetch_array($sql)) {
-					$this->Cell(60, 10, $data['NamaPsn'], 1, 0, 'L');
-					$this->Cell(60, 10, $data['AlamatPsn'], 1, 0, 'L');
-					$this->Cell(60, 10, $data['NamaDkt'], 1, 0, 'L');
-					$this->Cell(60, 10, $data['hasil'], 1, 0, 'L');
+					$this->SetFont('Times','U',20);
+					$this->Cell(0, 5, 'Data Pasien', 0, 0, 'C');
+					$this->Ln();
+					$this->Ln();
+					$this->Ln();
+					$this->Ln();
+					$this->SetLeftMargin(110);
+					$this->SetFont('Times','',12);
+					$this->Cell(30, 10, 'Nama Pasien', 0, 0, 'L');
+					$this->Cell(30, 10, ':', 0, 0, 'L');
+					$this->SetFont('Times','I',12);
+					$this->Cell(60, 10, $data['NamaPsn'], 0, 0, 'L');
+					$this->Ln();
+					$this->SetFont('Times','',12);
+					$this->Cell(30, 10, 'Alamat Pasien', 0, 0, 'L');
+					$this->Cell(30, 10, ':', 0, 0, 'L');
+					$this->SetFont('Times','I',12);
+					$this->Cell(60, 10, $data['AlamatPsn'], 0, 0, 'L');
+					$this->Ln();
+					$this->SetFont('Times','',12);
+					$this->Cell(30, 10, 'Nama Dokter', 0, 0, 'L');
+					$this->Cell(30, 10, ':', 0, 0, 'L');
+					$this->SetFont('Times','I',12);
+					$this->Cell(60, 10, "dr. ". $data['NamaDkt'], 0, 0, 'L');
+					$this->ln();
+					$this->SetFont('Times','',12);
+					$this->Cell(30, 10, 'Pesan', 0, 0, 'L');
+					$this->Cell(30, 10, ':', 0, 0, 'L');
+					$this->SetFont('Times','B',12);
+					$this->Cell(60, 10, $data['hasil'], 0, 0, 'L');
 					$this->ln();
 				}
 				break;
