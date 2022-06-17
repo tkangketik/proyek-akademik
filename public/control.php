@@ -236,7 +236,7 @@ if (isset($_GET['page'])) {
 		case 'req-acc':
 			include admin . 'enkripsi-req-acc.php';
 			break;
-		
+
 		case 'cari';
 			include admin . 'func_search.php';
 			break;
@@ -244,9 +244,14 @@ if (isset($_GET['page'])) {
 		case 'res-acc':
 			include admin . 'enkripsi-res-acc.php';
 			break;
-			case 'res-deny':
-				include admin . 'enkripsi-res-deny.php';
-				break;
+
+		case 'res-deny':
+			include admin . 'enkripsi-res-deny.php';
+			break;
+			
+		case 'detail';
+			include admin . 'enkripsi-detail.php';
+			break;
 
 		case 'del':
 			$id = $_GET['id'];
