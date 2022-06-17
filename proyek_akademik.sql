@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: May 28, 2022 at 06:23 PM
+-- Generation Time: Jun 17, 2022 at 04:50 PM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -77,20 +77,20 @@ INSERT INTO `dokter` (`KodeDkt`, `NamaDkt`, `Spesialis`, `AlamatDkt`, `TeleponDk
 
 CREATE TABLE `enkripsi` (
   `id` int(11) NOT NULL,
-  `nama` text NOT NULL,
+  `KodePsn` int(11) NOT NULL,
   `hasil` text NOT NULL,
   `kunci` text NOT NULL,
-  `status` int(11) NOT NULL,
-  `req` varchar(10) NOT NULL
+  `status` int(11) NOT NULL DEFAULT '0',
+  `req` varchar(10) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `enkripsi`
 --
 
-INSERT INTO `enkripsi` (`id`, `nama`, `hasil`, `kunci`, `status`, `req`) VALUES
-(4, 'Yuliana', 'DNXQJDQWXN', '12345', 0, '1'),
-(5, 'heri', 'SDUDFHWDPRO', '11111', 1, '1');
+INSERT INTO `enkripsi` (`id`, `KodePsn`, `hasil`, `kunci`, `status`, `req`) VALUES
+(5, 3, 'SDUDFHWDPRO', '11111', 1, '1'),
+(7, 2, 'RLMLE', '12345', 0, '1');
 
 -- --------------------------------------------------------
 
@@ -111,8 +111,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id_login`, `username`, `password`, `online`, `status`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'false', 'active'),
-(2, 'lili', '827ccb0eea8a706c4c34a16891f84e7b', 'true', 'active');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'true', 'active'),
+(2, 'lili', '827ccb0eea8a706c4c34a16891f84e7b', 'false', 'active');
 
 -- --------------------------------------------------------
 
@@ -160,7 +160,8 @@ CREATE TABLE `pasien` (
 
 INSERT INTO `pasien` (`KodePsn`, `NamaPsn`, `AlamatPsn`, `GenderPsn`, `TanggalLahir`, `TeleponPsn`) VALUES
 (2, 'heri', 'trini', 'Laki-Laki', '1977-07-03', 2147483647),
-(3, 'anggi', 'trini ', 'Perempuan', '2000-08-22', 2147483647);
+(3, 'anggi', 'trini ', 'Perempuan', '2000-08-22', 2147483647),
+(4, 'umar', 'haisdha', 'Laki-Laki', '1999-07-31', 12313);
 
 -- --------------------------------------------------------
 
@@ -273,7 +274,7 @@ CREATE TABLE `resep` (
 
 INSERT INTO `resep` (`NomorResep`, `TanggalResep`, `KodeDkt`, `KodePsn`, `KodePlk`, `TotalHarga`, `Bayar`, `Kembali`) VALUES
 (1, '2022-04-07', 2, 2, 1, 108000, 150000, 42000),
-(2, '2022-05-26', 2, 3, 1, 7500, 0, 0);
+(2, '2022-05-26', 2, 3, 1, 7500, 8000, 500);
 
 --
 -- Indexes for dumped tables
@@ -298,7 +299,8 @@ ALTER TABLE `dokter`
 -- Indexes for table `enkripsi`
 --
 ALTER TABLE `enkripsi`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `KodePsn` (`KodePsn`);
 
 --
 -- Indexes for table `login`
@@ -376,7 +378,7 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT for table `enkripsi`
 --
 ALTER TABLE `enkripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `login`
@@ -394,7 +396,7 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `KodePsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `KodePsn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pembayaran`
@@ -436,6 +438,12 @@ ALTER TABLE `detail`
 --
 ALTER TABLE `dokter`
   ADD CONSTRAINT `dokter_ibfk_1` FOREIGN KEY (`KodePlk`) REFERENCES `poliklinik` (`KodePlk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `enkripsi`
+--
+ALTER TABLE `enkripsi`
+  ADD CONSTRAINT `enkripsi_ibfk_1` FOREIGN KEY (`KodePsn`) REFERENCES `pasien` (`KodePsn`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pembayaran`
