@@ -23,6 +23,7 @@
       <div class="form-group col-3">
         <input type="Search" id="Search" class="form-control" onkeyup="TableSearch()" placeholder="Cari.." title="Type in a name" class="form-control">
       </div>
+      <a href="?pdf=Enkripsi" class="btn btn-default"><span class="fa fa-file-pdf-o"></span> PDF</a>
       <?php $notif = $db->query("SELECT * FROM enkripsi where status=0"); ?>
       <?php if ($_SESSION['level'] == 0) { ?>
         <a href="?enkripsi=list-acc" title="add" class="btn btn-success"><span><?= $notif->num_rows; ?></span> Permintaan Akses</a></h2>

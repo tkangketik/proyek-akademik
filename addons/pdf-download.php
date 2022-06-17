@@ -36,6 +36,10 @@ class myPDF extends FPDF
 				$this->Cell(276, 10, 'Tanggal : ' . date('d F Y'), 0, 0, 'L');
 				break;
 
+				case 'Enkripsi':
+					$this->Cell(276, 10, 'Tanggal : ' . date('d F Y'), 0, 0, 'L');
+					break;
+
 			case 'Obat':
 				$this->Cell(276, 10, 'Tanggal : ' . date('d F Y'), 0, 0, 'L');
 				break;
@@ -105,6 +109,14 @@ class myPDF extends FPDF
 				$this->Cell(60, 10, 'Alamat', 1, 0, 'L');
 				$this->Cell(60, 10, 'Nama Poli', 1, 0, 'L');
 				break;
+
+				case 'Enkripsi':
+					$this->Cell(20, 10, '#', 1, 0, 'C');
+					$this->Cell(60, 10, 'Nama Pasien', 1, 0, 'L');
+					$this->Cell(60, 10, 'Alamat Pasien', 1, 0, 'L');
+					$this->Cell(60, 10, 'Nama Dokter', 1, 0, 'L');
+					$this->Cell(60, 10, 'Pesan', 1, 0, 'L');
+					break;
 		}
 		$this->Ln();
 	}
@@ -209,6 +221,19 @@ class myPDF extends FPDF
 					$this->ln();
 				}
 				break;
+			
+				case 'Enkripsi':
+					$no = 1;
+					$sql = $db->query("SELECT * FROM enkripsi INNER JOIN pasien on enkripsi.KodePsn = pasien.KodePsn INNER JOIN resep on enkripsi.KodePsn = resep.KodePsn INNER JOIN dokter on resep.KodeDkt = dokter.KodeDkt");
+					while ($data = $db->fetch_array($sql)) {
+						$this->Cell(20, 10, $no++, 1, 0, 'C');
+						$this->Cell(60, 10, $data['NamaPsn'], 1, 0, 'L');
+						$this->Cell(60, 10, $data['AlamatPsn'], 1, 0, 'L');
+						$this->Cell(60, 10, $data['NamaDkt'], 1, 0, 'L');
+						$this->Cell(60, 10, $data['hasil'], 1, 0, 'L');
+						$this->ln();
+					}
+					break;
 		}
 	}
 }
