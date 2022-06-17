@@ -236,6 +236,10 @@ if (isset($_GET['page'])) {
 		case 'req-acc':
 			include admin . 'enkripsi-req-acc.php';
 			break;
+		
+		case 'cari';
+			include admin . 'func_search.php';
+			break;
 
 		case 'res-acc':
 			include admin . 'enkripsi-res-acc.php';
