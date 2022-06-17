@@ -6,7 +6,7 @@
     <?php
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $data = $db->query("SELECT * FROM enkripsi INNER JOIN pasien on enkripsi.KodePsn = pasien.KodePsn INNER JOIN resep on enkripsi.NomorResep = resep.NomorResep INNER JOIN dokter on resep.KodeDkt = dokter.KodeDkt WHERE id = '$id'")->fetch_array();
+        $data = $db->query("SELECT * FROM enkripsi INNER JOIN pasien on enkripsi.KodePsn = pasien.KodePsn INNER JOIN resep on enkripsi.KodePsn = resep.KodePsn INNER JOIN dokter on resep.KodeDkt = dokter.KodeDkt WHERE id = '$id'")->fetch_array();
     ?>
         <table class="table table-striped">
             <tr>
