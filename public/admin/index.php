@@ -54,7 +54,7 @@
 	<?php } if ($_SESSION['level'] == 0 || $_SESSION['level'] == 3){ ?>
 	<a href="?enkripsi=list">
 		<div class="card col-3" align="center">
-			<div class="card-heading"><h1><i class="fa fa-newspaper-o"></i></h1>Enkripsi&Dekripsi</div>
+			<div class="card-heading"><h1><i class="fa fa-key"></i></h1>Enkripsi&Dekripsi</div>
 			<div class="card-body">
 			<h1 style="display:inline-block;"><?= $db->get("enkripsi")->num_rows; ?></h1>Rows
 			</div>
