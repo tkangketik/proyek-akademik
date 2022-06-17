@@ -1,7 +1,7 @@
 <div class="content">
     <div>
         <button onclick="goBack()" class="btn btn-default"><i class="fa fa-caret-left"></i> back</button>
-        <h2>Detail</h2>
+        <h2>Detail | <a href="?pdf=Pasien&id=<?= $_GET['id']; ?>" class="btn btn-default"><span class="fa fa-print"></span> Print</a>
     </div>
     <?php
     if (isset($_GET['id'])) {
