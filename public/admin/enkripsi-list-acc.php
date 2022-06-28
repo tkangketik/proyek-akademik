@@ -33,12 +33,12 @@
                 <tbody>
                     <?php
                     $no = 1;
-                    $qw = $db->query("SELECT * FROM enkripsi ORDER BY id DESC");
+                    $qw = $db->query("SELECT enkripsi.*, pasien.* FROM enkripsi INNER JOIN pasien on enkripsi.KodePsn = pasien.KodePsn ORDER BY id DESC");
                     while ($data = $db->fetch_array($qw)) {
                     ?>
                         <tr>
                             <td><?= $no++ ?></td>
-                            <td><?= $data['nama'] ?></td>
+                            <td><?= $data['NamaPsn'] ?></td>
                             <td><?= $data['hasil'] ?></td>
                             <td><?php if ($data['status'] == 0) { echo "belum disetujui"; } else { echo "setuju"; } ?></td>
                             <td>
